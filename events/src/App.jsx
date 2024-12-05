@@ -1,14 +1,10 @@
 import "./App.css";
-import AlertClock from "./components/AlertClock";
+import Somma from "./components/Somma";
 
 function App() {
-  function handleAlertClock() {
-    const oraCorrente = new Date().toLocaleTimeString();
-    alert(`Ora Corrente: ${oraCorrente}`);
-  }
   return (
     <>
-      <AlertClock onClick={handleAlertClock} />
+      <Somma />
     </>
   );
 }
