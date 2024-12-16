@@ -39,7 +39,7 @@ export function Registrazione() {
     //se trova un errore esce dalla funzione submit
     if(errore) return;
 
-    const existData = localStorage.getItem("users");
+    const existData = localStorage.getItem("userDatabase");
     let utentiRegistrati = [];
     
     //verifica se esiste l'array vuoto
@@ -56,7 +56,7 @@ export function Registrazione() {
       return;
     }
     utentiRegistrati.push(data);
-    localStorage.setItem("users", JSON.stringify(utentiRegistrati));
+    localStorage.setItem("userDatabase", JSON.stringify(utentiRegistrati));
     setData({
       nome: "",
       cognome: "",

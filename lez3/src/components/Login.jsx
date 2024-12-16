@@ -17,14 +17,16 @@ export function Login() {
 
   const handleLogin = (event) => {
     event.preventDefault();
-    const users = localStorage.getItem("users");
-    const parseUsers = JSON.parse(users);
-    const usersExist = parseUsers.some(
+    const userDatabase = localStorage.getItem("users");
+    const parseUsers = JSON.parse(userDatabase);
+    const userExist = parseUsers.find(
       (x) => x.email === data.email && x.password === data.password
     );
-    if (usersExist) {
+    if (userExist) {
       setMessaggio("Login effettuato con successo");
+      // eslint-disable-next-line no-unused-vars
       const isLogged = localStorage.setItem("isLogged", true)
+      localStorage.setItem("userExist", JSON.stringify("userExist"))
     } else {
       setMessaggio("Credenziali errate");
     }
