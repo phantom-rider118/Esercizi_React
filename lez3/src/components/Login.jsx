@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "./UserContext";
 
 export function Login() {
   const [data, setData] = useState({
@@ -6,6 +7,9 @@ export function Login() {
     password: "",
   });
   const [messaggio, setMessaggio] = useState("");
+ //prende la funzione login utilizzando il contesto userContext
+  const {login} = useContext(UserContext) 
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -19,14 +23,17 @@ export function Login() {
     event.preventDefault();
     const userDatabase = localStorage.getItem("users");
     const parseUsers = JSON.parse(userDatabase);
+    console.log(parseUsers);
+    
     const userExist = parseUsers.find(
       (x) => x.email === data.email && x.password === data.password
     );
+    console.log(userExist);
+    
     if (userExist) {
       setMessaggio("Login effettuato con successo");
-      // eslint-disable-next-line no-unused-vars
-      const isLogged = localStorage.setItem("isLogged", true)
-      localStorage.setItem("userExist", JSON.stringify("userExist"))
+      //fa tutto nella funzione login che abbiamo richiamato
+      login(userExist)
     } else {
       setMessaggio("Credenziali errate");
     }
@@ -47,7 +54,7 @@ export function Login() {
         />
 
         <button type="submit">Login</button>
-        {messaggio && <p>{messaggio}</p>}
+        {messaggio && (<p style={{color: "red"}}>{messaggio}</p>)}
       </form>
     </div>
   );
