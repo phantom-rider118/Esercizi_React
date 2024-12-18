@@ -11,19 +11,21 @@ export function UserProvider({ children }) {
   const [userLogged, setUserLogged] = useState(null);
 
   useEffect(() => {
-    const data = localStorage.getItem("user");
+    const data = localStorage.getItem("userLog");
+    //se esiste allora cambia null con quel dato
     if (data) {
       setUserLogged(JSON.parse(data));
     }
   }, []);
 
+  //accetta oggetto user ancora non stabilito
   const login = (user) => {
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("userLog", JSON.stringify(user));
     setUserLogged(user);
   };
 
   const logout = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("userLog");
     setUserLogged(null);
   };
 
